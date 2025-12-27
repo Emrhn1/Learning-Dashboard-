@@ -6,7 +6,7 @@ import {usePathname} from "next/navigation";
 const Sidebar = () => {
    const pathname = usePathname();
     return (
-        <aside className="w-64 flex flex-col h-screen bg-gray-200">
+        <aside className="w-64 flex flex-col h-screen bg-white">
               <h2 className="m-6 text-[#171717] font-bold text-lg">
                   Learning Hub
               </h2>
