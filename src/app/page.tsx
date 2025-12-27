@@ -2,6 +2,7 @@
 import Image from "next/image";
 import Sidebar from "@/components/layout/Sidebar";
 import StatCard from "@/components/dashboard/StatCard";
+import DashboardHero from "@/components/Hero/DashboardHero";
 import {useHeader} from "@/app/providers";
 import {useEffect} from "react";
 export default function Home() {
@@ -12,6 +13,7 @@ export default function Home() {
   return (
       <div className="px-20 py-8">
     <StatCard/>
+          <DashboardHero/>
       </div>
   );
 }
