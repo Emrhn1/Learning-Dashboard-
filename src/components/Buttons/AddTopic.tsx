@@ -3,99 +3,177 @@ import {Dialog,DialogHeader,DialogTitle,DialogContent,DialogFooter,DialogClose,D
 import {Label} from "@/components/ui/label"
 import {Input} from   "@/components/ui/input"
 import {useState,useEffect} from "react";
-import ToggleButton from '@mui/material/ToggleButton';
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { Progress } from "@/components/ui/progress"
 import {Textarea} from "@/components/ui/textarea";
 import {ToggleGroup,ToggleGroupItem} from "@/components/ui/toggle-group";
 
 const AddTopic = () => {
     const [progress, setProgress] = useState(13)
+
     useEffect(()=>{
         const timer = setTimeout(() => setProgress(66), 500)
         return () => clearTimeout(timer)
     },[])
+
+    const handleSubmit = () => {
+        // Form submit logic here
+        console.log('Topic added');
+    }
+
     return (
         <Dialog>
-            <form>
-                <DialogTrigger asChild>
-                    <Button variant="outline">Add Topic</Button>
-                </DialogTrigger>
-                <DialogContent>
-                    <DialogTitle>Add New Topic</DialogTitle>
-                    <DialogDescription>Track a new learning topic and start your progress</DialogDescription>
-                    <div className="grid gap-4">
-                        <div className="grid gap-3">
-                            <Label className="text-[#404040]" htmlFor="topics-title">Topic Title *</Label>
-                            <Input required id="title" name="name" placeholder="e.g. Typescript Generics" />
-                        </div>
-                        <div className="grid gap-3">
-                            <Label className="font-normal text-[#404040]" htmlFor="category">Category</Label>
-                            <Input id="username-1" name="username"/>
-                        </div>
-                        <div className="flex flex-col mt-3 gap-3">
-                            <Label>Difficulty Level</Label>
-                        <ToggleGroup spacing={9} type="single">
+            <DialogTrigger asChild>
+                <Button variant="outline" className="w-full sm:w-auto">
+                    Add Topic
+                </Button>
+            </DialogTrigger>
+
+            {/* Responsive Dialog Content */}
+            <DialogContent className="w-[95vw] max-w-[425px] sm:max-w-[500px] max-h-[90vh] overflow-y-auto p-4 sm:p-6">
+                <DialogHeader className="space-y-2">
+                    <DialogTitle className="text-lg sm:text-xl">
+                        Add New Topic
+                    </DialogTitle>
+                    <DialogDescription className="text-sm sm:text-base">
+                        Track a new learning topic and start your progress
+                    </DialogDescription>
+                </DialogHeader>
+
+                {/* Form Grid - Responsive Spacing */}
+                <div className="grid gap-3 sm:gap-4 py-4">
+
+                    {/* Topic Title */}
+                    <div className="grid gap-2 sm:gap-3">
+                        <Label
+                            className="text-sm sm:text-base text-[#404040]"
+                            htmlFor="title"
+                        >
+                            Topic Title *
+                        </Label>
+                        <Input
+                            className="w-full h-10 sm:h-11 text-sm sm:text-base"
+                            required
+                            id="title"
+                            name="name"
+                            placeholder="e.g. Typescript Generics"
+                        />
+                    </div>
+
+                    {/* Category */}
+                    <div className="grid gap-2 sm:gap-3">
+                        <Label
+                            className="text-sm sm:text-base font-normal text-[#404040]"
+                            htmlFor="category"
+                        >
+                            Category
+                        </Label>
+                        <Input
+                            id="category"
+                            className="w-full h-10 sm:h-11 text-sm sm:text-base"
+                            name="category"
+                            placeholder="e.g. Programming"
+                        />
+                    </div>
+
+                    {/* Difficulty Level - Responsive Toggle */}
+                    <div className="flex flex-col gap-2 sm:gap-3">
+                        <Label className="text-sm sm:text-base">
+                            Difficulty Level
+                        </Label>
+                        <ToggleGroup type="single" className="flex gap-2 justify-center items-center">
                             <ToggleGroupItem
-                                value="star"
-                                aria-label="Toggle star"
-                                className="px-8 bg-transparent text-[#171717] border data-[state=on]:bg-[#171717] data-[state=on]:text-white"
+                                value="beginner"
+                                aria-label="Beginner"
+                                className="flex-1 min-w-[90px] sm:min-w-[100px] h-9 sm:h-10 text-xs sm:text-sm bg-transparent text-[#171717] border data-[state=on]:bg-[#171717] data-[state=on]:text-white"
                             >
                                 Beginner
                             </ToggleGroupItem>
                             <ToggleGroupItem
-                                value="heart"
-                                aria-label="Toggle heart"
-                                className="px-8 bg-transparent text-[#171717] border data-[state=on]:bg-[#171717] data-[state=on]:text-white"
+                                value="intermediate"
+                                aria-label="Intermediate"
+                                className="flex-1 min-w-[90px] sm:min-w-[110px] h-9 sm:h-10 text-xs sm:text-sm bg-transparent text-[#171717] border data-[state=on]:bg-[#171717] data-[state=on]:text-white"
                             >
                                 Intermediate
                             </ToggleGroupItem>
                             <ToggleGroupItem
-                                value="bookmark"
-                                aria-label="Toggle bookmark"
-                                className="px-8 bg-transparent text-[#171717] border data-[state=on]:bg-[#171717] data-[state=on]:text-white"
+                                value="advanced"
+                                aria-label="Advanced"
+                                className="flex-1 min-w-[90px] sm:min-w-[100px] h-9 sm:h-10 text-xs sm:text-sm bg-transparent text-[#171717] border data-[state=on]:bg-[#171717] data-[state=on]:text-white"
                             >
                                 Advanced
                             </ToggleGroupItem>
                         </ToggleGroup>
-                        </div>
-                        <div className="flex flex-col mt-3 gap-3">
-                            <Label>Status</Label>
-                                <ToggleGroup spacing={3} type="single">
-                                    <ToggleGroupItem
-                                        value="star"
-                                        aria-label="Toggle star"
-                                        className="px-24 bg-transparent text-[#171717] border data-[state=on]:bg-[#00A63E] data-[state=on]:text-white"
-                                    >
-                                        Active
-                                    </ToggleGroupItem>
-                                    <ToggleGroupItem
-                                        value="heart"
-                                        aria-label="Toggle heart"
-                                        className="px-24 bg-transparent text-[#171717] border data-[state=on]:bg-[#f54a00] data-[state=on]:text-white"
-                                    >
-                                        Stuck
-                                    </ToggleGroupItem>
-                                </ToggleGroup>
-                        </div>
-                        <div className="flex flex-col mt-3 gap-3">
-                            <Label>Starting Progress</Label>
-                            <Progress value={progress} className="w-[100%]"/>
-                        </div>
-                        <div className="flex flex-col mt-3 gap-3">
-                            <Label>Optional Notes</Label>
-                            <Textarea placeholder="Why are you learning this? Any context or goals?"/>
+                    </div>
+
+                    {/* Status - Responsive Toggle */}
+                    <div className="flex flex-col gap-2 sm:gap-3">
+                        <Label className="text-sm sm:text-base">
+                            Status
+                        </Label>
+                        <ToggleGroup type="single" className="flex flex-wrap gap-2 justify-between">
+                            <ToggleGroupItem
+                                value="active"
+                                aria-label="Active"
+                                className="flex-1 min-w-[100px] sm:min-w-[120px] h-9 sm:h-10 text-xs sm:text-sm bg-transparent text-[#171717] border data-[state=on]:bg-[#00A63E] data-[state=on]:text-white"
+                            >
+                                Active
+                            </ToggleGroupItem>
+                            <ToggleGroupItem
+                                value="stuck"
+                                aria-label="Stuck"
+                                className="flex-1 min-w-[100px] sm:min-w-[120px] h-9 sm:h-10 text-xs sm:text-sm bg-transparent text-[#171717] border data-[state=on]:bg-[#f54a00] data-[state=on]:text-white"
+                            >
+                                Stuck
+                            </ToggleGroupItem>
+                        </ToggleGroup>
+                    </div>
+
+                    {/* Progress */}
+                    <div className="flex flex-col gap-2 sm:gap-3">
+                        <Label className="text-sm sm:text-base">
+                            Starting Progress
+                        </Label>
+                        <div className="space-y-2">
+                            <Progress value={progress} className="w-full h-1 sm:h-3"/>
+                            <p className="text-xs sm:text-sm text-gray-500 text-right">
+                                {progress}%
+                            </p>
                         </div>
                     </div>
-                    <DialogFooter>
-                        <DialogClose>
-                            <Button variant="outline" color="primary">Cancel</Button>
-                        </DialogClose>
-                        <Button variant="default" className="bg-[#171717] text-white">Add Topic</Button>
-                    </DialogFooter>
-                </DialogContent>
-            </form>
+
+                    {/* Optional Notes */}
+                    <div className="flex flex-col gap-2 sm:gap-3">
+                        <Label className="text-sm sm:text-base">
+                            Optional Notes
+                        </Label>
+                        <Textarea
+                            placeholder="Why are you learning this? Any context or goals?"
+                            className="min-h-[80px] sm:min-h-[100px] text-sm sm:text-base resize-none"
+                        />
+                    </div>
+                </div>
+
+                {/* Responsive Footer - Stack on mobile, row on desktop */}
+                <DialogFooter className="flex flex-col-reverse sm:flex-row gap-2 sm:gap-3">
+                    <DialogClose asChild>
+                        <Button
+                            variant="outline"
+                            className="w-full sm:w-auto h-10 sm:h-11 text-sm sm:text-base"
+                        >
+                            Cancel
+                        </Button>
+                    </DialogClose>
+                    <Button
+                        onClick={handleSubmit}
+                        variant="default"
+                        className="w-full sm:w-auto h-10 sm:h-11 bg-[#171717] text-white text-sm sm:text-base hover:bg-[#2a2a2a]"
+                    >
+                        Add Topic
+                    </Button>
+                </DialogFooter>
+            </DialogContent>
         </Dialog>
     )
 }
+
 export default AddTopic
