@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
-import {HeaderProvider} from "@/app/providers";
+import { HeaderProvider, SidebarProvider } from "@/app/providers";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -29,18 +29,21 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-      <HeaderProvider>
-      <main className="flex h-screen bg-[#e5e5e5]">
-      <Sidebar/>
-        <div className="flex flex-col flex-1">
-            <Header/>
-            <div className="flex-1 p-6">
-            {children}
-            </div>
-        </div>
-      </main>
-      </HeaderProvider>
+        <HeaderProvider>
+          <SidebarProvider>
+            <main className="flex h-screen bg-[#e5e5e5] overflow-hidden">
+              <Sidebar />
+              <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
+                <Header />
+                <div className="flex-1 overflow-y-auto">
+                  {children}
+                </div>
+              </div>
+            </main>
+          </SidebarProvider>
+        </HeaderProvider>
       </body>
     </html>
   );
 }
+
