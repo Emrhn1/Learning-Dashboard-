@@ -6,9 +6,16 @@ import {useState,useEffect} from "react";
 import { Progress } from "@/components/ui/progress"
 import {Textarea} from "@/components/ui/textarea";
 import {ToggleGroup,ToggleGroupItem} from "@/components/ui/toggle-group";
+import {toast} from "sonner"
 
 const AddTopic = () => {
     const [progress, setProgress] = useState(13)
+    const [title,setTitle] = useState("")
+    const [category, setCategory] = useState("")
+    const [level, setLevel] = useState("")
+    const [status, setStatus] = useState("")
+    const [message, setMessage] = useState("")
+    const [open,setOpen] = useState(false)
 
     useEffect(()=>{
         const timer = setTimeout(() => setProgress(66), 500)
@@ -16,12 +23,23 @@ const AddTopic = () => {
     },[])
 
     const handleSubmit = () => {
-        // Form submit logic here
-        console.log('Topic added');
+       if (!title || !category || !level || !status) {
+           toast.error("Please fill all fields")
+           return;
+       }
+       else {
+           toast.success("Topic added successfully!")
+       }
+       setTitle("");
+       setCategory("");
+       setLevel("");
+       setStatus("");
+       setMessage("")
+         setOpen(false);
     }
 
     return (
-        <Dialog>
+        <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
                 <Button variant="outline" className="w-full sm:w-auto">
                     Add Topic
@@ -56,6 +74,8 @@ const AddTopic = () => {
                             id="title"
                             name="name"
                             placeholder="e.g. Typescript Generics"
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
                         />
                     </div>
 
@@ -72,15 +92,18 @@ const AddTopic = () => {
                             className="w-full h-10 sm:h-11 text-sm sm:text-base"
                             name="category"
                             placeholder="e.g. Programming"
+                            required
+                            value={category}
+                            onChange={(e) => setCategory(e.target.value)}
                         />
                     </div>
 
                     {/* Difficulty Level - Responsive Toggle */}
-                    <div className="flex flex-col gap-2 sm:gap-3">
-                        <Label className="text-sm sm:text-base">
+                    <div className="grid grid-col gap-2 sm:gap-3">
+                        <Label className="text-sm text-[#404040] sm:text-base">
                             Difficulty Level
                         </Label>
-                        <ToggleGroup type="single" className="flex gap-2 justify-center items-center">
+                        <ToggleGroup onValueChange={(e)=> {setLevel(e)}} value={level} type="single" className="w-full justify-between grid grid-cols-3 gap-3 items-center">
                             <ToggleGroupItem
                                 value="beginner"
                                 aria-label="Beginner"
@@ -106,11 +129,10 @@ const AddTopic = () => {
                     </div>
 
                     {/* Status - Responsive Toggle */}
-                    <div className="flex flex-col gap-2 sm:gap-3">
-                        <Label className="text-sm sm:text-base">
+                        <Label className="text-sm text-[#404040] sm:text-base">
                             Status
                         </Label>
-                        <ToggleGroup type="single" className="flex flex-wrap gap-2 justify-between">
+                        <ToggleGroup onValueChange={(e)=> setStatus(e)} value={status} type="single" className="w-full flex flex-wrap gap-2 justify-between">
                             <ToggleGroupItem
                                 value="active"
                                 aria-label="Active"
@@ -126,27 +148,27 @@ const AddTopic = () => {
                                 Stuck
                             </ToggleGroupItem>
                         </ToggleGroup>
-                    </div>
+
 
                     {/* Progress */}
-                    <div className="flex flex-col gap-2 sm:gap-3">
-                        <Label className="text-sm sm:text-base">
+                    <div className="flex flex-col mt-1 -mb-1 gap-2 sm:gap-3">
+                        <Label className="text-sm text-[#404040] sm:text-base">
                             Starting Progress
                         </Label>
-                        <div className="space-y-2">
-                            <Progress value={progress} className="w-full h-1 sm:h-3"/>
+                            <Progress value={progress} className="w-full"/>
                             <p className="text-xs sm:text-sm text-gray-500 text-right">
                                 {progress}%
                             </p>
-                        </div>
-                    </div>
 
+                    </div>
                     {/* Optional Notes */}
-                    <div className="flex flex-col gap-2 sm:gap-3">
-                        <Label className="text-sm sm:text-base">
+                    <div className="flex flex-col -mt-2 gap-2 sm:gap-3">
+                        <Label className="text-sm text-[#404040] sm:text-base">
                             Optional Notes
                         </Label>
                         <Textarea
+                            value={message}
+                            onChange={(e) => setMessage(e.target.value)}
                             placeholder="Why are you learning this? Any context or goals?"
                             className="min-h-[80px] sm:min-h-[100px] text-sm sm:text-base resize-none"
                         />
