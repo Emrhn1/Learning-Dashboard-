@@ -9,7 +9,7 @@ const StatCard = () => {
             {statCardProps.map((prop, key) => {
                 const Icon = prop.icon
                 return (
-                    <Card key={key} className="w-full min-h-[134px] sm:min-h-[170px] pt-4 sm:pt-6 pb-1">
+                    <Card key={key} className="w-full hover:shadow-md min-h-[134px] sm:min-h-[170px] pt-4 sm:pt-6 pb-1">
                         <CardContent>
                             <div className="flex flex-row justify-between">
                                 <div className="flex flex-col items-start gap-1">
