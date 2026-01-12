@@ -4,6 +4,8 @@ import "./globals.css";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { HeaderProvider, SidebarProvider } from "@/app/providers";
+import {Toaster} from "sonner";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -36,6 +38,7 @@ export default function RootLayout({
               <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
                 <Header />
                 <div className="flex-1 overflow-y-auto">
+                    <Toaster richColors position="bottom-right" />
                   {children}
                 </div>
               </div>
