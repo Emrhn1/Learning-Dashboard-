@@ -1,9 +1,10 @@
-type TopicCard = {
+export type TopicCards = {
     title: string;
     description: string;
     level: LevelType
 }
-type LevelType = "Beginner" | "Intermediate" | "Advanced";
+export type LevelType = "Beginner" | "Intermediate" | "Advanced";
+export type Status = "Active" | "Stuck"
 
 interface LevelStyle {
     bg: string;
@@ -11,33 +12,12 @@ interface LevelStyle {
     border: string;
 }
 
-export const topicCards:TopicCard[] = [
-    {
-        title: "React Hooks",
-        description: "Frontend Development",
-        level: "Beginner"
-    },
-    {
-        title: "React Hooks",
-        description: "Frontend Development",
-        level: "Intermediate",
-    },
-    {
-        title: "React Hooks",
-        description: "Frontend Development",
-        level: "Advanced",
-    },
-    {
-        title: "React Hooks",
-        description: "Frontend Development",
-        level: "Advanced",
-    },
-    {
-        title: "React Hooks",
-        description: "Frontend Development",
-        level: "Intermediate",
-    }
-]
+interface StatusStyle {
+    bg: string;
+    text: string;
+    border: string;
+}
+
 export const levelStyles: Record<LevelType, LevelStyle> = {
     Beginner: {
         bg: "bg-green-100",
@@ -55,3 +35,16 @@ export const levelStyles: Record<LevelType, LevelStyle> = {
         border: "border-purple-500"
     }
 };
+
+export const statusStyles: Record<Status,StatusStyle> = {
+    Active: {
+        bg: "bg-[#dcfce7]",
+        text: "text-[#008236]",
+        border: "border-green-500"
+    },
+    Stuck: {
+        bg: "bg-[#fff7ed]",
+        text: "text-[#f54900]",
+        border: "border-orange-500"
+    }
+}
