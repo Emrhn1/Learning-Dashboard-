@@ -7,15 +7,20 @@ import { Progress } from "@/components/ui/progress"
 import {Textarea} from "@/components/ui/textarea";
 import {ToggleGroup,ToggleGroupItem} from "@/components/ui/toggle-group";
 import {toast} from "sonner"
+import {useAppDispatch} from "@/app/hooks";
+import {addTopic} from "@/redux/features/topics/addTopics";
+import { LevelType } from "@/types/topicCard";
 
 const AddTopic = () => {
     const [progress, setProgress] = useState(13)
     const [title,setTitle] = useState("")
     const [category, setCategory] = useState("")
-    const [level, setLevel] = useState("")
+    const [level, setLevel] = useState<LevelType | "">("")
     const [status, setStatus] = useState("")
     const [message, setMessage] = useState("")
     const [open,setOpen] = useState(false)
+
+   const dispatch = useAppDispatch();
 
     useEffect(()=>{
         const timer = setTimeout(() => setProgress(66), 500)
@@ -28,6 +33,16 @@ const AddTopic = () => {
            return;
        }
        else {
+        dispatch(
+          addTopic({
+            id: Date.now().toString(),
+            title: title, 
+            category: category,
+            level: level,
+            status: status,
+            message: message,
+          })
+        );
            toast.success("Topic added successfully!")
        }
        setTitle("");
@@ -35,7 +50,7 @@ const AddTopic = () => {
        setLevel("");
        setStatus("");
        setMessage("")
-         setOpen(false);
+       setOpen(false);
     }
 
     return (
@@ -103,23 +118,23 @@ const AddTopic = () => {
                         <Label className="text-sm text-[#404040] sm:text-base">
                             Difficulty Level
                         </Label>
-                        <ToggleGroup onValueChange={(e)=> {setLevel(e)}} value={level} type="single" className="w-full justify-between grid grid-cols-3 gap-3 items-center">
+                        <ToggleGroup onValueChange={(e)=> {setLevel(e as LevelType)}} value={level} type="single" className="w-full justify-between grid grid-cols-3 gap-3 items-center">
                             <ToggleGroupItem
-                                value="beginner"
+                                value="Beginner"
                                 aria-label="Beginner"
                                 className="flex-1 min-w-[90px] sm:min-w-[100px] h-9 sm:h-10 text-xs sm:text-sm bg-transparent text-[#171717] border data-[state=on]:bg-[#171717] data-[state=on]:text-white"
                             >
                                 Beginner
                             </ToggleGroupItem>
                             <ToggleGroupItem
-                                value="intermediate"
+                                value="Intermediate"
                                 aria-label="Intermediate"
                                 className="flex-1 min-w-[90px] sm:min-w-[110px] h-9 sm:h-10 text-xs sm:text-sm bg-transparent text-[#171717] border data-[state=on]:bg-[#171717] data-[state=on]:text-white"
                             >
                                 Intermediate
                             </ToggleGroupItem>
                             <ToggleGroupItem
-                                value="advanced"
+                                value="Advanced"
                                 aria-label="Advanced"
                                 className="flex-1 min-w-[90px] sm:min-w-[100px] h-9 sm:h-10 text-xs sm:text-sm bg-transparent text-[#171717] border data-[state=on]:bg-[#171717] data-[state=on]:text-white"
                             >
@@ -134,14 +149,14 @@ const AddTopic = () => {
                         </Label>
                         <ToggleGroup onValueChange={(e)=> setStatus(e)} value={status} type="single" className="w-full flex flex-wrap gap-2 justify-between">
                             <ToggleGroupItem
-                                value="active"
+                                value="Active"
                                 aria-label="Active"
                                 className="flex-1 min-w-[100px] sm:min-w-[120px] h-9 sm:h-10 text-xs sm:text-sm bg-transparent text-[#171717] border data-[state=on]:bg-[#00A63E] data-[state=on]:text-white"
                             >
                                 Active
                             </ToggleGroupItem>
                             <ToggleGroupItem
-                                value="stuck"
+                                value="Stuck"
                                 aria-label="Stuck"
                                 className="flex-1 min-w-[100px] sm:min-w-[120px] h-9 sm:h-10 text-xs sm:text-sm bg-transparent text-[#171717] border data-[state=on]:bg-[#f54a00] data-[state=on]:text-white"
                             >
