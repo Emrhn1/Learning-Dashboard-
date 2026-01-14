@@ -4,7 +4,7 @@ export type TopicCards = {
     level: LevelType
 }
 export type LevelType = "Beginner" | "Intermediate" | "Advanced";
-export type Status = "Active" | "Stuck"
+export type Status = "Active" | "Stuck" | "Completed";
 
 interface LevelStyle {
     bg: string;
@@ -36,7 +36,7 @@ export const levelStyles: Record<LevelType, LevelStyle> = {
     }
 };
 
-export const statusStyles: Record<Status,StatusStyle> = {
+export const statusStyles: Record<Status, StatusStyle> = {
     Active: {
         bg: "bg-[#dcfce7]",
         text: "text-[#008236]",
@@ -46,5 +46,10 @@ export const statusStyles: Record<Status,StatusStyle> = {
         bg: "bg-[#fff7ed]",
         text: "text-[#f54900]",
         border: "border-orange-500"
+    },
+    Completed: {
+        bg: "bg-gray-100",
+        text: "text-gray-700",
+        border: "border-gray-500"
     }
 }
