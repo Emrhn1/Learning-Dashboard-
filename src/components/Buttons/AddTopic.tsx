@@ -1,3 +1,4 @@
+"use client"
 import {Button} from  "@/components/ui/button"
 import {Dialog,DialogHeader,DialogTitle,DialogContent,DialogFooter,DialogClose,DialogDescription,DialogTrigger} from "@/components/ui/dialog"
 import {Label} from "@/components/ui/label"
@@ -9,14 +10,14 @@ import {ToggleGroup,ToggleGroupItem} from "@/components/ui/toggle-group";
 import {toast} from "sonner"
 import {useAppDispatch} from "@/app/hooks";
 import {addTopic} from "@/redux/features/topics/addTopics";
-import { LevelType } from "@/types/topicCard";
+import { LevelType,Status } from "@/types/topicCard";
 
 const AddTopic = () => {
     const [progress, setProgress] = useState(13)
     const [title,setTitle] = useState("")
     const [category, setCategory] = useState("")
     const [level, setLevel] = useState<LevelType | "">("")
-    const [status, setStatus] = useState("")
+    const [status, setStatus] = useState<Status | "">("")
     const [message, setMessage] = useState("")
     const [open,setOpen] = useState(false)
 
@@ -147,7 +148,7 @@ const AddTopic = () => {
                         <Label className="text-sm text-[#404040] sm:text-base">
                             Status
                         </Label>
-                        <ToggleGroup onValueChange={(e)=> setStatus(e)} value={status} type="single" className="w-full flex flex-wrap gap-2 justify-between">
+                        <ToggleGroup onValueChange={(e)=> setStatus(e as Status)} value={status} type="single" className="w-full flex flex-wrap gap-2 justify-between">
                             <ToggleGroupItem
                                 value="Active"
                                 aria-label="Active"
