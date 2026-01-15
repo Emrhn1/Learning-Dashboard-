@@ -1,9 +1,11 @@
 import {configureStore} from "@reduxjs/toolkit";
 import {addTopics} from "@/redux/features/topics/addTopics";
+import { CardSlice } from "@/redux/features/reflection";
 
 export const store = configureStore({
     reducer: {
         topic: addTopics.reducer,
+        cards: CardSlice.reducer,
     }
 })
 
