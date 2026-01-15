@@ -6,6 +6,7 @@ import TopicCard from "@/components/dashboard/TopicCard";
 import { useHeader } from "@/app/providers";
 import { useEffect } from "react";
 import { useAppSelector } from "@/app/hooks";
+
 export default function Home() {
   const { setHeaderText } = useHeader();
   useEffect(() => {
@@ -13,6 +14,7 @@ export default function Home() {
   })
 
   const topics = useAppSelector((state:any)=> state.topic.data)
+ 
 
   return (
     <div className="px-20 py-8">
