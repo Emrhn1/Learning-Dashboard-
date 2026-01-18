@@ -12,22 +12,25 @@ const TopicsPage = () => {
         setHeaderText("Manage all your learning topics")
     })
     const filteredTopics = useAppSelector(selectFilteredTopics);
+    const topics = useAppSelector((state)=> state.topic.data)
     return (
         <div className="px-20 flex flex-col gap-6">
             <Hero title={"Topics"} description={"Manage and track all your learning topics"}/>
             <TopicFilter/>
             <div className="w-full grid grid-cols-1 mt-4 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5">
-                {filteredTopics ? filteredTopics.map((topic: any, index: number) => (
-                    <TopicCard
-                        key={index}
-                        title={topic.title}
-                        category={topic.category}
-                        level={topic.level}
-                        message={topic.message}
-                        status={topic.status}
-                    />
-                )): (
-                    <p>No topics found.</p>
+                {topics.length > 0 ? (
+                    topics.map((topic: any, index: number) => (
+                            <TopicCard
+                                key={index}
+                                title={topic.title}
+                                category={topic.category}
+                                level={topic.level}
+                                message={topic.message}
+                                status={topic.status}
+                            />
+                        ))
+                ): (
+                    <p className="text-[#525252] font-semibold">No topics found...</p>
                 )}
             </div>
         </div>
