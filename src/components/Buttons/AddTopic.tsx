@@ -57,7 +57,7 @@ const AddTopic = () => {
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <Button variant="outline" className="w-full sm:w-auto">
+                <Button variant="outline" className="w-full bg-[#171717] text-white hover:bg-[#2a2a2a] hover:text-white  sm:w-auto">
                     Add Topic
                 </Button>
             </DialogTrigger>
@@ -119,25 +119,25 @@ const AddTopic = () => {
                         <Label className="text-sm text-[#404040] sm:text-base">
                             Difficulty Level
                         </Label>
-                        <ToggleGroup onValueChange={(e)=> {setLevel(e as LevelType)}} value={level} type="single" className="w-full justify-between grid grid-cols-3 gap-3 items-center">
+                        <ToggleGroup onValueChange={(e)=> {setLevel(e as LevelType)}} value={level} type="single" className="w-full justify-between grid grid-cols-3 gap-2 items-center">
                             <ToggleGroupItem
                                 value="Beginner"
                                 aria-label="Beginner"
-                                className="flex-1 min-w-[90px] sm:min-w-[100px] h-9 sm:h-10 text-xs sm:text-sm bg-transparent text-[#171717] border data-[state=on]:bg-[#171717] data-[state=on]:text-white"
+                                className="flex-1 min-w-[90px] sm:min-w-[100px] !rounded-lg h-9 sm:h-10 text-xs sm:text-sm bg-transparent text-[#171717] border data-[state=on]:bg-[#171717] data-[state=on]:text-white"
                             >
                                 Beginner
                             </ToggleGroupItem>
                             <ToggleGroupItem
                                 value="Intermediate"
                                 aria-label="Intermediate"
-                                className="flex-1 min-w-[90px] sm:min-w-[110px] h-9 sm:h-10 text-xs sm:text-sm bg-transparent text-[#171717] border data-[state=on]:bg-[#171717] data-[state=on]:text-white"
+                                className="flex-1 min-w-[90px] sm:min-w-[110px] !rounded-lg h-9 sm:h-10 text-xs sm:text-sm bg-transparent text-[#171717] border data-[state=on]:bg-[#171717] data-[state=on]:text-white"
                             >
                                 Intermediate
                             </ToggleGroupItem>
                             <ToggleGroupItem
                                 value="Advanced"
                                 aria-label="Advanced"
-                                className="flex-1 min-w-[90px] sm:min-w-[100px] h-9 sm:h-10 text-xs sm:text-sm bg-transparent text-[#171717] border data-[state=on]:bg-[#171717] data-[state=on]:text-white"
+                                className="flex-1 min-w-[90px] sm:min-w-[100px] !rounded-lg h-9 sm:h-10 text-xs sm:text-sm bg-transparent text-[#171717] border data-[state=on]:bg-[#171717] data-[state=on]:text-white"
                             >
                                 Advanced
                             </ToggleGroupItem>
@@ -152,14 +152,14 @@ const AddTopic = () => {
                             <ToggleGroupItem
                                 value="Active"
                                 aria-label="Active"
-                                className="flex-1 min-w-[100px] sm:min-w-[120px] h-9 sm:h-10 text-xs sm:text-sm bg-transparent text-[#171717] border data-[state=on]:bg-[#00A63E] data-[state=on]:text-white"
+                                className="flex-1 min-w-[100px] sm:min-w-[120px] !rounded-lg h-9 sm:h-10 text-xs sm:text-sm bg-transparent text-[#171717] border data-[state=on]:bg-[#00A63E] data-[state=on]:text-white"
                             >
                                 Active
                             </ToggleGroupItem>
                             <ToggleGroupItem
                                 value="Stuck"
                                 aria-label="Stuck"
-                                className="flex-1 min-w-[100px] sm:min-w-[120px] h-9 sm:h-10 text-xs sm:text-sm bg-transparent text-[#171717] border data-[state=on]:bg-[#f54a00] data-[state=on]:text-white"
+                                className="flex-1 min-w-[100px] sm:min-w-[120px] !rounded-lg h-9 sm:h-10 text-xs sm:text-sm bg-transparent text-[#171717] border data-[state=on]:bg-[#f54a00] data-[state=on]:text-white"
                             >
                                 Stuck
                             </ToggleGroupItem>
@@ -180,13 +180,15 @@ const AddTopic = () => {
                     {/* Optional Notes */}
                     <div className="flex flex-col -mt-2 gap-2 sm:gap-3">
                         <Label className="text-sm text-[#404040] sm:text-base">
-                            Optional Notes
+                            {status==="Active" && null ? "Optional Notes" : "Where are you stuck?"}
                         </Label>
                         <Textarea
+                            disabled={status === "Active"}
+                            required={status === "Stuck"}
                             value={message}
                             onChange={(e) => setMessage(e.target.value)}
-                            placeholder="Why are you learning this? Any context or goals?"
-                            className="min-h-[80px] sm:min-h-[100px] text-sm sm:text-base resize-none"
+                            placeholder={status==="Active" ? "Why are you learning this? Any context or goals?" : "Describe what's difficult or what's blocking your progress..."}
+                            className={`min-h-[80px] sm:min-h-[100px] border text-sm sm:text-base resize-none ${status==="Stuck" && "bg-orange-50 border-orange-50" }`}
                         />
                     </div>
                 </div>
