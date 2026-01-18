@@ -40,7 +40,7 @@ const TopicCard = ({title,category,level,status}: TopicCardProps) => {
                                         {progress}%
                                     </p>
                                 <div className="flex gap-2">
-                                <CalendarTodayIcon fontSize={"inherit"}/>
+                                <CalendarTodayIcon style={{color:"#a1a1a1"}} fontSize={"inherit"}/>
                                 <span className="text-[#a1a1a1] text-[12px]">Last Studied: Today</span>
                                 </div>
                                 <div className={`px-3 py-1 absolute top-0 right-0 rounded-md text-xs font-medium ${statusStyle?.bg} ${statusStyle?.text} ${statusStyle?.border}`}>
