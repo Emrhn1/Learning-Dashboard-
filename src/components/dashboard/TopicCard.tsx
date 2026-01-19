@@ -38,8 +38,8 @@ const TopicCard = ({title,category,level,status,progress}: TopicCardProps) => {
                                         {progres}%
                                     </p>
                                 <div className="flex items-center gap-2">
-                                <Button className="w-4 h-7 hover:bg-gray-800 rounded-lg" disabled={progres>=100} onClick={()=> setProgress(progres+5)}>+</Button>
-                                <Button className="w-4 h-7 bg-blue-50 hover:bg-blue-100 text-black rounded-lg" disabled={progres<=0} onClick={()=> setProgress(progres-5)}>-</Button>
+                                <Button className="w-4 h-7 hover:bg-gray-400 rounded-lg" disabled={progres>=100} onClick={()=> setProgress(progres+5)}>+</Button>
+                                <Button className="w-4 h-7 bg-blue-50 hover:bg-blue-200 text-black rounded-lg" disabled={progres<=0} onClick={()=> setProgress(progres-5)}>-</Button>
                                 </div>
                                 <div className="flex gap-2">
                                 <CalendarTodayIcon style={{color:"#a1a1a1"}} fontSize={"inherit"}/>
