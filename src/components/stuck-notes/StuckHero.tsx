@@ -6,7 +6,7 @@ import {selectStuckTopicsCount} from "@/redux/features/topics/addTopics";
 const StuckHero = () => {
     const stuckCount = useAppSelector(selectStuckTopicsCount);
     return (
-       <Card className="bg-[#FFF7ED] space-y-4">
+       <Card className="bg-[#FFF7ED] dark:bg-sidebar space-y-4">
            <CardContent className="flex flex-row justify-between">
                <div className="flex flex-col gap-1">
                <Label className="text-[14px] font-normal">Topics needing attention</Label>

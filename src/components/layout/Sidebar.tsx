@@ -22,13 +22,13 @@ const Sidebar = () => {
 
             {/* Sidebar */}
             <aside className={`
-                fixed inset-y-0 left-0 z-50 w-64 bg-white
+                fixed inset-y-0 left-0 z-50 w-64 bg-sidebar dark: bg-sidebar dark:text-sidebar-foreground
                 transform transition-transform duration-300 ease-in-out
                 ${isOpen ? 'translate-x-0' : '-translate-x-full'}
                 lg:relative lg:translate-x-0 lg:flex lg:flex-col lg:h-screen
             `}>
                 <div className="flex items-center justify-between m-4 lg:m-6">
-                    <h2 className="text-[#171717] font-bold text-lg">
+                    <h2 className="text-[#171717] dark:text-sidebar-foreground font-bold text-lg">
                         Learning Hub
                     </h2>
                     {/* Close button - mobile only */}
@@ -51,8 +51,8 @@ const Sidebar = () => {
                                     variant={isActive ? "secondary" : "ghost"}
                                     className="w-full cursor-pointer flex items-center gap-3 justify-start py-2 text-[#525252]"
                                 >
-                                    <Icon className={isActive ? "text-white w-4 h-4" : "text-[#525252] w-4 h-4 "} />
-                                    <span className={isActive ? "text-white" : "text-[#525252]"}>{button.text}</span>
+                                    <Icon className={isActive ? "text-white w-4 h-4" : "text-[#525252] dark: text-sidebar-foreground w-4 h-4 "} />
+                                    <span className={isActive ? "text-white" : "text-[#525252] dark: text-sidebar-foreground"}>{button.text}</span>
                                 </Button>
                             </Link>
                         )

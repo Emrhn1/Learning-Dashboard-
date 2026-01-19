@@ -32,12 +32,12 @@ const StuckNotesList = () => {
                             {topic.level}
                         </div>
                     </div>
-                    <Card className="w-full bg-[#FFF7ED] border-none shadow-none">
+                    <Card className="w-full bg-[#FFF7ED] dark:bg-gray-800 border-none shadow-none">
                         <CardContent className="p-3">
-                            <Label className="text-sm text-[#525252] font-medium">
+                            <Label className="text-sm text-[#525252] dark:text-sidebar-foreground font-medium">
                                 Where I'm stuck:
                             </Label>
-                            <p className="text-sm text-[#171717] mt-1">{topic.message}</p>
+                            <p className="text-sm dark:text-sidebar-foreground mt-1">{topic.message}</p>
                         </CardContent>
                     </Card>
                     <div className="flex justify-between items-center">

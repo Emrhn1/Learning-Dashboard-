@@ -11,7 +11,7 @@ const StuckNotes = () => {
         setHeaderText("Work through your learning blockers");
     },[setHeaderText])
     return (
-        <div className="flex flex-col gap-8 px-80 py-8">
+        <div className="flex h-full dark:bg-sidebar flex-col gap-8 px-80 py-8">
             <div className="flex gap-4 items-center">
                 <ErrorOutlineOutlinedIcon style={{color:"#f54900", backgroundColor:"#FFF7ED", borderRadius:"10px", width:"40px", height:"40px" ,padding:"8px" }} />
                 <Hero title={"Stuck Notes"} description={"Focus on your learning blockers and work through difficulties"}/>

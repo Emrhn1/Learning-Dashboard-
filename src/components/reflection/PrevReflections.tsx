@@ -24,7 +24,7 @@ const PrevReflections = () => {
             <CardContent className="space-y-4 p-0">
               <div className="flex items-center gap-2 text-muted-foreground text-sm">
                 <CalendarTodayOutlinedIcon style={{ fontSize: "16px" }} />
-                <span>{formatDate(new Date())}</span>
+                <span className="dark:text-sidebar-foreground">{formatDate(new Date())}</span>
               </div>
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
