@@ -6,6 +6,7 @@ import Hero from "@/components/Hero/Hero"
 import {useAppSelector} from "@/app/hooks";
 import TopicCard from "@/components/dashboard/TopicCard";
 import { selectFilteredTopics } from "@/redux/features/topics/addTopics";
+import {Card} from "@/components/ui/card";
 
 const TopicsPage = () => {
     const {setHeaderText} = useHeader()
@@ -32,7 +33,9 @@ const TopicsPage = () => {
                             />
                         ))
                 ): (
-                    <p className="text-[#525252] font-semibold">No topics found...</p>
+                    <Card className="w-full p-8 text-center">
+                        <p className="dark:text-sidebar-foreground">No stuck topics yet! 🎉</p>
+                    </Card>
                 )}
             </div>
         </div>
