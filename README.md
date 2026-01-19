@@ -155,13 +155,6 @@ src/
 └── main.tsx                   # Application entry point
 ```
 
-## 🔄 State Management
-
-The application uses React's built-in state management with `useState` hooks. All data is currently stored in-memory and resets on page refresh. For production use, consider integrating:
-
-- Local Storage for persistence
-- Backend API for multi-device sync
-- Supabase for real-time collaboration
 
 ## 🤝 Contributing
 
@@ -175,16 +168,12 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 📝 Future Enhancements
 
-- [ ] Backend integration with Supabase
-- [ ] User authentication
 - [ ] Data persistence
 - [ ] Export learning progress as PDF/CSV
 - [ ] Calendar view for learning sessions
-- [ ] Pomodoro timer integration
 - [ ] Goal setting and tracking
 - [ ] Learning resources attachment
 - [ ] Dark mode support
-- [ ] Mobile app version
 
 
 
