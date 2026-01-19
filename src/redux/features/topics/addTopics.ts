@@ -9,6 +9,7 @@ interface Topic {
   level: LevelType;
   status: Status;
   message?: string;
+  progress: number;
 }
 
 interface TopicState {
