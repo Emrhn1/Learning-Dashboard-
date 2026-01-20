@@ -23,7 +23,7 @@ const StuckNotesList = () => {
         <div className="w-full flex flex-col gap-6">
             {stuckTopics.length > 0 ? (
                 stuckTopics.map((topic, index) => (
-                    <Card key={index} className="w-full flex flex-col p-6">
+                    <Card key={index} className="w-full flex flex-col hover:shadow-md p-6">
                         <div className="flex justify-between items-start">
                             <div className="flex flex-col gap-1">
                                 <CardTitle className="text-xl font-semibold">

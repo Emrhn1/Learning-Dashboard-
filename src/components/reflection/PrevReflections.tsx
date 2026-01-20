@@ -20,7 +20,7 @@ const PrevReflections = () => {
     <div className="space-y-4">
       {cards.map((card, index) => {
         return (
-          <Card key={index} className="w-auto xs:w-[550px] p-6">
+          <Card key={index} className="w-auto xs:w-[550px] hover:shadow-md p-6">
             <CardContent className="space-y-4 p-0">
               <div className="flex items-center gap-2 text-muted-foreground text-sm">
                 <CalendarTodayOutlinedIcon style={{ fontSize: "16px" }} />
@@ -32,7 +32,7 @@ const PrevReflections = () => {
                     style={{ fontSize: "18px" }}
                     className="text-green-500"
                   />
-                  <span className="font-medium text-sm">What I learned:</span>
+                  <span className="font-normal text-sm">What I learned:</span>
                 </div>
                 <p className="text-sm leading-relaxed pl-6">{card.learned}</p>
               </div>
@@ -42,7 +42,7 @@ const PrevReflections = () => {
                     style={{ fontSize: "18px" }}
                     className="text-orange-500"
                   />
-                  <span className="font-medium text-sm">What was difficult:</span>
+                  <span className="font-normal text-sm">What was difficult:</span>
                 </div>
                 <p className="text-sm leading-relaxed pl-6">
                   {card.difficult}
