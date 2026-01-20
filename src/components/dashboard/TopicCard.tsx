@@ -34,12 +34,12 @@ const TopicCard = ({title,category,level,status,progress}: TopicCardProps) => {
                                     {level}
                                 </div>
                                     <Progress value={progres} className="w-full"/>
-                                    <p className="text-xs sm:text-sm text-gray-500 dark:text-sidebar-foreground text-right">
+                                    <p className={`text-xs sm:text-sm ${progres<50 ? "text-black" : progres>=55 && progres<75 ? "text-blue-600" : progres>=75 && progres<=100 ? "text-green-500" : "text-black" } dark:text-sidebar-foreground text-right`}>
                                         {progres}%
                                     </p>
                                 <div className="flex items-center gap-2">
-                                <Button className="w-4 h-7 hover:bg-gray-400 rounded-lg" disabled={progres>=100} onClick={()=> setProgress(progres+5)}>+</Button>
-                                <Button className="w-4 h-7 bg-blue-50 hover:bg-blue-200 text-black rounded-lg" disabled={progres<=0} onClick={()=> setProgress(progres-5)}>-</Button>
+                                <Button className="w-4 h-7 hover:bg-gray-400 rounded-lg disabled:opacity-0 disabled:cursor-not-allowed" disabled={progres>=100} onClick={()=> setProgress(progres+5)}>+</Button>
+                                <Button className="w-4 h-7 bg-blue-300 hover:bg-blue-200 disabled:opacity-0 disabled:cursor-not-allowedtext-black rounded-lg" disabled={progres<=0 || progres===100} onClick={()=> setProgress(progres-5)}>-</Button>
                                 </div>
                                 <div className="flex gap-2">
                                 <CalendarTodayIcon style={{color:"#a1a1a1"}} fontSize={"inherit"}/>
