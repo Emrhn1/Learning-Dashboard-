@@ -8,7 +8,7 @@ interface Topic {
   category: string;
   level: LevelType;
   status: Status;
-  message?: string;
+  message: string;
   progress: number;
 }
 
@@ -42,6 +42,9 @@ export const addTopics = createSlice({
         state.currentStatus = action.payload.status;
       }
     },
+    hydrateTopics(state, action: PayloadAction<Topic[]>) {
+      state.data = action.payload;
+    },
   },
 });
 
@@ -62,4 +65,4 @@ export const selectStuckTopicsCount = (state: RootState) =>
   state.topic.data.filter((topic) => topic.status === "Stuck").length;
 
 export default addTopics.reducer;
-export const { addTopic, updateFilterTopic } = addTopics.actions;
+export const { addTopic, updateFilterTopic, hydrateTopics } = addTopics.actions;
