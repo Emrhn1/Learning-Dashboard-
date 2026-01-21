@@ -5,7 +5,8 @@ import TopicCard from "@/components/dashboard/TopicCard";
 import { useHeader } from "@/app/providers";
 import { useEffect } from "react";
 import { useAppSelector } from "@/app/hooks";
-
+import { useAppDispatch } from "@/app/hooks";
+import { hydrateTopics } from "@/redux/features/topics/addTopics";
 export default function Home() {
   const { setHeaderText } = useHeader();
   useEffect(() => {
@@ -13,7 +14,15 @@ export default function Home() {
   })
 
   const topics = useAppSelector((state)=> state.topic.data)
- 
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const storedTopics = localStorage.getItem("topic");
+    if (storedTopics) {
+      dispatch(hydrateTopics(JSON.parse(storedTopics)));
+    }
+  }, [dispatch]);
+
 
   return (
     <div className="px-20 h-full py-8 dark: bg-sidebar">
