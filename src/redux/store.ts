@@ -8,6 +8,11 @@ export const store = configureStore({
         cards: CardSlice.reducer,
     }
 })
+store.subscribe(()=> {
+    const state = store.getState();
+    localStorage.setItem("topic", JSON.stringify(state.topic.data));
+    console.log("State saved to localStorage:", state.topic.data);
+})
 
-export type RootState = ReturnType<typeof store.getState>
+export type RootState = ReturnType<typeof store.getState>   
 export type AppDispatch = typeof store.dispatch
