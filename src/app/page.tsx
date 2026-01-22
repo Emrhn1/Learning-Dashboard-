@@ -25,7 +25,7 @@ export default function Home() {
 
 
   return (
-    <div className="px-20 h-full py-8 dark:bg-sidebar">
+    <div className="px-4 h-full sm:px-8 md:px-12 lg:px-16 xl:px-20 h-full py-4 md:py-6 lg:py-8 dark:bg-sidebar">
       <StatCard />
       <Hero title={"Your Learning Topics"} description={"Continue your learning journey"} />
       <div className="w-full grid grid-cols-1 mt-4 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5">
