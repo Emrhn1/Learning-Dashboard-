@@ -10,6 +10,7 @@ interface Topic {
   status: Status;
   message: string;
   progress: number;
+  solution: string;
 }
 
 interface TopicState {
@@ -45,6 +46,16 @@ export const addTopics = createSlice({
     hydrateTopics(state, action: PayloadAction<Topic[]>) {
       state.data = action.payload;
     },
+      removeTopic: (state, action: PayloadAction<string>) => {
+       state.data = state.data.filter((item)=> item.id !== action.payload);
+      },
+      saveSolution: (state, action: PayloadAction<{ id: string; solution: string }>) => {
+  const topic = state.data.find((item) => item.id === action.payload.id);
+  if (topic) {
+    topic.solution = action.payload.solution;
+    topic.status = "Active"; 
+  }
+}
   },
 });
 
@@ -64,5 +75,9 @@ export const selectActiveTopicsCount = (state: RootState) =>
 export const selectStuckTopicsCount = (state: RootState) =>
   state.topic.data.filter((topic) => topic.status === "Stuck").length;
 
+export const selectSolutionsCount = (state: RootState) => {
+   return state.topic.data.filter((topic) => topic.solution).length;
+}
+
 export default addTopics.reducer;
-export const { addTopic, updateFilterTopic, hydrateTopics } = addTopics.actions;
+export const { addTopic, updateFilterTopic, hydrateTopics, removeTopic,saveSolution } = addTopics.actions;
