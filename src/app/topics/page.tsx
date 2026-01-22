@@ -33,6 +33,7 @@ const TopicsPage = () => {
                 {topics.length > 0 ? (
                     filteredTopics.map((topic: any, index: number) => (
                             <TopicCard
+                                id={topic.id}
                                 key={index}
                                 title={topic.title}
                                 category={topic.category}

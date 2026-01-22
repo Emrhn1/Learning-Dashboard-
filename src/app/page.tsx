@@ -25,13 +25,14 @@ export default function Home() {
 
 
   return (
-    <div className="px-20 h-full py-8 dark: bg-sidebar">
+    <div className="px-20 h-full py-8 dark:bg-sidebar">
       <StatCard />
       <Hero title={"Your Learning Topics"} description={"Continue your learning journey"} />
       <div className="w-full grid grid-cols-1 mt-4 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5">
           {topics.length > 0 ? (
               topics.map((topic: any, index: number) => (
                       <TopicCard
+                          id={topic.id}
                           key={index}
                           title={topic.title}
                           category={topic.category}
