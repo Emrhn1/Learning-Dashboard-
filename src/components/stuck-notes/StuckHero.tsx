@@ -9,8 +9,8 @@ const StuckHero = () => {
        <Card className="bg-[#FFF7ED] dark:bg-sidebar space-y-4">
            <CardContent className="flex flex-row justify-between">
                <div className="flex flex-col gap-1">
-               <Label className="text-[14px] font-normal">Topics needing attention</Label>
-               <Label className="text-[30px] font-normal">{stuckCount}</Label>
+               <Label className="text-[14px]  font-normal text-[#7E2A0C] dark:text-sidebar-foreground">Topics needing attention</Label>
+               <Label className="text-[30px] font-normal text-[#7E2A0C] dark:text-sidebar-foreground  ">{stuckCount}</Label>
                </div>
                <LightbulbOutlinedIcon style={{ fontSize: "48px" }}
                                       className="text-[#FF8904]"/>
