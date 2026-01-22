@@ -1,13 +1,14 @@
 import { Card, CardTitle, CardContent } from "@/components/ui/card"
-import { useAppSelector } from "@/app/hooks";
+import { useAppSelector, useAppDispatch } from "@/app/hooks";
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button";
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
-import {top} from "@popperjs/core";
-
+import {useState} from "react";
+import { saveSolution } from "@/redux/features/topics/addTopics";
 
 const StuckNotesList = () => {
-
+    const dispatch = useAppDispatch();
+    
     const formatDate = (date: Date) => {
         return date.toLocaleDateString("en-US", {
             year: "numeric",
@@ -18,7 +19,22 @@ const StuckNotesList = () => {
     
     const topics = useAppSelector((state) => state.topic.data)
     const stuckTopics = topics.filter(topic => topic.status === "Stuck")
-    
+    const [showSolutions, setShowSolutions] = useState<string | null>(null)
+    const [solutionInputs, setSolutionInputs] = useState<{ [key: string]: string }>({});
+
+    const handleAddSolution = (topicId: string) => {
+        if (showSolutions === topicId) {
+            const solutionText = solutionInputs[topicId];
+            if (solutionText && solutionText.trim()) {
+                dispatch(saveSolution({ id: topicId, solution: solutionText }));
+                setSolutionInputs({ ...solutionInputs, [topicId]: '' });
+                setShowSolutions(null);
+            }
+        } else {
+            setShowSolutions(topicId);
+        }
+    };
+
     return (
         <div className="w-full flex flex-col gap-6">
             {stuckTopics.length > 0 ? (
@@ -43,6 +59,19 @@ const StuckNotesList = () => {
                                 <p className="text-sm dark:text-sidebar-foreground mt-1">{topic.message}</p>
                             </CardContent>
                         </Card>
+                        {showSolutions === topic.id && (
+                            <div className="bg-green-50 border dark:bg-sidebar border-green-200 rounded-lg p-4 mb-4">
+                                <p className="text-neutral-700 dark:text-sidebar-foreground text-sm mb-2">Solution / How I resolved it:</p>
+                                <textarea
+                                    value={solutionInputs[topic.id] || ''}
+                                    onChange={(e) => setSolutionInputs({ ...solutionInputs, [topic.id]: e.target.value })}
+                                    placeholder="Describe how you solved this problem..."
+                                    rows={3}
+                                    autoFocus
+                                    className="w-full px-3 py-2 border border-green-200 dark:bg-sidebar rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-green-500 text-neutral-900 dark:text-sidebar-foreground placeholder:text-neutral-400"
+                                />
+                            </div>
+                        )}
                         <div className="flex justify-between items-center">
                             <div className="flex gap-2 items-center">
                                 <CalendarTodayIcon 
@@ -54,15 +83,11 @@ const StuckNotesList = () => {
                             </div>
                             <div className="flex gap-3">
                                 <Button 
+                                    onClick={()=> handleAddSolution(topic.id)}
                                     variant="outline" 
                                     className="text-sm"
                                 >
-                                    Add Solution
-                                </Button>
-                                <Button 
-                                    className="bg-[#16A34A] hover:bg-[#15803D] text-white text-sm"
-                                >
-                                    Mark Resolved
+                                      {showSolutions === topic.id ? 'Save Solution' : 'Add Solution'}
                                 </Button>
                             </div>
                         </div>
