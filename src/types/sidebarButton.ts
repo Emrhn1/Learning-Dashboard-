@@ -2,7 +2,7 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import TopicIcon from '@mui/icons-material/Topic';
 import FmdBadIcon from '@mui/icons-material/FmdBad';
 import EmojiObjectsIcon from '@mui/icons-material/EmojiObjects';
-
+import TaskAltIcon from '@mui/icons-material/TaskAlt';
 export type SidebarButton = {
     icon: any;
     text: string;
@@ -29,5 +29,10 @@ export const buttons: SidebarButton[] = [
       icon: EmojiObjectsIcon,
       text: "Reflection",
         url: "/reflection"
+    },
+    {
+        icon: TaskAltIcon,
+        text: "Solutions",
+        url: "/solutions"
     }
 ]
