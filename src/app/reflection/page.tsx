@@ -3,9 +3,13 @@ import Hero from "@/components/Hero/Hero"
 import AddReflection from "@/components/reflection/AddReflection";
 import PrevReflections from "@/components/reflection/PrevReflections";
 import AutoAwesomeOutlinedIcon from '@mui/icons-material/AutoAwesomeOutlined';
+import { Button } from "@/components/ui/button";
 import {useEffect} from "react";
 import {useHeader} from "@/app/providers";
+import { clearCards } from "@/redux/features/reflection";
+import { useAppDispatch } from "@/app/hooks";
 const ReflectionPage = () => {
+    const dispatch = useAppDispatch();
     const {setHeaderText} = useHeader();
     useEffect(()=> {
         setHeaderText("Reflect on your learning journey")
@@ -17,6 +21,9 @@ const ReflectionPage = () => {
         <Hero title={"Reflection"} description={"Take a moment to reflect on your learning journey"}/>
         </div>
             <AddReflection />
+             <Button className="w-fit mt-2 mb-4" onClick={() => dispatch(clearCards())}>
+                Clear All Reflections
+             </Button>   
             <PrevReflections />
         </div>
     )
