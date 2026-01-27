@@ -10,7 +10,7 @@ interface Topic {
   status: Status;
   message: string;
   progress: number;
-  solution: string;
+  solution?: string;
 }
 
 interface TopicState {
