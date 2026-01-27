@@ -1,13 +1,14 @@
 "use client";
-import { useAppSelector } from "@/app/hooks";
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
 import { Card, CardContent } from "@/components/ui/card";
 import LightbulbOutlinedIcon from "@mui/icons-material/LightbulbOutlined";
 import ErrorRoundedIcon from "@mui/icons-material/ErrorRounded";
 import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
-
+import ClearIcon from '@mui/icons-material/Clear';
+import { clearCards } from "@/redux/features/reflection";
 const PrevReflections = () => {
   const cards = useAppSelector((state) => state.cards.cards);
-
+  const dispatch = useAppDispatch();
   const formatDate = (date: Date) => {
     return date.toLocaleDateString("en-US", {
       year: "numeric",
@@ -48,6 +49,7 @@ const PrevReflections = () => {
                   {card.difficult}
                 </p>
               </div>
+             <ClearIcon color="error" className="cursor-pointer" onClick={()=> dispatch(clearCards())}/>
             </CardContent>
           </Card>
         );
