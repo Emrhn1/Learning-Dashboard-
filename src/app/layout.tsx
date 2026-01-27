@@ -46,11 +46,11 @@ export default function RootLayout({
               >
                 <HeaderProvider>
                   <SidebarProvider>
-                    <main className="flex h-screen bg-[#e5e5e5] overflow-hidden">
+                    <main className="flex h-screen bg-[#e5e5e5] dark:bg-sidebar overflow-hidden">
                       <Sidebar />
                       <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
                         <Header />
-                        <div className="flex-1 overflow-y-auto">
+                        <div className="flex-1 overflow-y-auto bg-[#e5e5e5] dark:bg-sidebar">
                           <Toaster richColors position="bottom-right" />
                           {children}
                         </div>
