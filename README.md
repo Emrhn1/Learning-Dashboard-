@@ -42,7 +42,7 @@ A modern, minimalist personal learning management application that helps you tra
 - **TypeScript** - Type-safe development
 - **Tailwind CSS v4** - Utility-first styling
 - **Material UI** - Beautiful icon library
-
+- **Clerk** - Authentication
 
 ## 🎨 Design Philosophy
 
