@@ -10,16 +10,22 @@ import {
     DropdownMenuContent,
     DropdownMenuItem,
     DropdownMenuTrigger,
+    DropdownMenuSeparator
 } from "@/components/ui/dropdown-menu"
+import { SignedIn, SignedOut, useClerk, useUser } from '@clerk/nextjs';
+import { useRouter } from 'next/navigation';
 
 const Header = () => {
     const { headerText } = useHeader()
     const { toggle } = useSidebar()
     const { setTheme } = useTheme()
+    const { signOut } = useClerk()
+    const { user } = useUser()
+    const router = useRouter()
+
     return (
         <header className="bg-white dark:bg-sidebar border-b px-4 sm:px-6 lg:px-8 py-3 sm:py-4 items-center flex justify-between w-full min-h-[60px] sm:min-h-[70px] lg:min-h-[91px]">
             <div className="flex items-center gap-3">
-                {/* Hamburger menu - mobile only */}
                 <Button
                     variant="ghost"
                     size="icon"
@@ -30,7 +36,7 @@ const Header = () => {
                 </Button>
 
                 <div className="min-w-0">
-                    <h1 className="text-lg sm:text-xl lg:text-2xl font-medium text-[#171717] dark: text-sidebar-foreground truncate">
+                    <h1 className="text-lg sm:text-xl lg:text-2xl font-medium text-[#171717] dark:text-sidebar-foreground truncate">
                         Learning Dashboard
                     </h1>
                     <p className="text-xs sm:text-sm text-[#525252] dark:text-sidebar-foreground truncate">
@@ -38,26 +44,64 @@ const Header = () => {
                     </p>
                 </div>
             </div>
-            <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                    <Button variant="outline" size="icon">
-                        <Sun className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
-                        <Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
-                        <span className="sr-only">Toggle theme</span>
-                    </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                    <DropdownMenuItem onClick={() => setTheme("light")}>
-                        Light
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => setTheme("dark")}>
-                        Dark
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => setTheme("system")}>
-                        System
-                    </DropdownMenuItem>
-                </DropdownMenuContent>
-            </DropdownMenu>
+            <div className="flex items-center gap-2 sm:gap-4">
+                <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                        <Button variant="outline" size="icon">
+                            <PersonIcon fontSize="small" />
+                        </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                        {/* Giriş yapmamış kullanıcılar için */}
+                        <SignedOut>
+                            <DropdownMenuItem onClick={() => router.push('/sign-in')}>
+                                Login
+                            </DropdownMenuItem>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem onClick={() => router.push('/sign-up')}>
+                                Register
+                            </DropdownMenuItem>
+                        </SignedOut>
+
+                        {/* Giriş yapmış kullanıcılar için */}
+                        <SignedIn>
+                            <div className="px-2 py-1.5 text-sm text-muted-foreground">
+                                {user?.firstName} {user?.lastName}
+                            </div>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem
+                                onClick={() => signOut(() => router.push('/sign-in'))}
+                                className="text-red-600 focus:text-red-600"
+                            >
+                                Logout
+                            </DropdownMenuItem>
+                        </SignedIn>
+                    </DropdownMenuContent>
+                </DropdownMenu>
+
+                <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                        <Button variant="outline" size="icon">
+                            <Sun className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
+                            <Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
+                            <span className="sr-only">Toggle theme</span>
+                        </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                        <DropdownMenuItem onClick={() => setTheme("light")}>
+                            Light
+                        </DropdownMenuItem>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem onClick={() => setTheme("dark")}>
+                            Dark
+                        </DropdownMenuItem>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem onClick={() => setTheme("system")}>
+                            System
+                        </DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
+            </div>
         </header>
     )
 }

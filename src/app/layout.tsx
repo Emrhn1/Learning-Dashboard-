@@ -1,13 +1,15 @@
 "use client";
-import { ThemeProvider } from "@/components/theme-provider"
+import { ThemeProvider } from "@/components/theme-provider";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { HeaderProvider, SidebarProvider } from "@/app/providers";
-import {Toaster} from "sonner";
+import { Toaster } from "sonner";
 import { Provider } from "react-redux";
 import { store } from "@/redux/store";
+import { ClerkProvider } from "@clerk/nextjs";
+import UserDataProvider from "@/components/providers/UserDataProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,7 +20,6 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
-
 
 export default function RootLayout({
   children,
@@ -34,30 +35,33 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Provider store={store}>
-            <ThemeProvider
+        <ClerkProvider>
+          <Provider store={store}>
+            <UserDataProvider>
+              <ThemeProvider
                 attribute="class"
                 defaultTheme="light"
                 enableSystem
                 disableTransitionOnChange
-            >
-
-        <HeaderProvider>
-          <SidebarProvider>
-            <main className="flex h-screen bg-[#e5e5e5] overflow-hidden">
-              <Sidebar />
-              <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
-                <Header />
-                <div className="flex-1 overflow-y-auto">
-                    <Toaster richColors position="bottom-right" />
-                  {children}
-                </div>
-              </div>
-            </main>
-          </SidebarProvider>
-        </HeaderProvider>
-            </ThemeProvider>
-        </Provider>
+              >
+                <HeaderProvider>
+                  <SidebarProvider>
+                    <main className="flex h-screen bg-[#e5e5e5] overflow-hidden">
+                      <Sidebar />
+                      <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
+                        <Header />
+                        <div className="flex-1 overflow-y-auto">
+                          <Toaster richColors position="bottom-right" />
+                          {children}
+                        </div>
+                      </div>
+                    </main>
+                  </SidebarProvider>
+                </HeaderProvider>
+              </ThemeProvider>
+            </UserDataProvider>
+          </Provider>
+        </ClerkProvider>
       </body>
     </html>
   );
