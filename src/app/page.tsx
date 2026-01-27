@@ -15,7 +15,7 @@ export default function Home() {
   const topics = useAppSelector((state) => state.topic.data)
 
   return (
-    <div className="px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 py-4 md:py-6 lg:py-8 dark:bg-sidebar">
+    <div className="px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 py-4 md:py-8 lg:py-8 dark:bg-sidebar">
       <StatCard />
       <Hero title={"Your Learning Topics"} description={"Continue your learning journey"} />
       <div className="w-full grid grid-cols-1 mt-4 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5">
