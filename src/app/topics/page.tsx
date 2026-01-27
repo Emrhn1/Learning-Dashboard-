@@ -7,23 +7,15 @@ import {useAppSelector} from "@/app/hooks";
 import TopicCard from "@/components/dashboard/TopicCard";
 import { selectFilteredTopics } from "@/redux/features/topics/addTopics";
 import {Card} from "@/components/ui/card";
-import { useAppDispatch } from "@/app/hooks";
-import { hydrateTopics } from "@/redux/features/topics/addTopics";
+
 const TopicsPage = () => {
     const {setHeaderText} = useHeader()
     useEffect(()=>{
         setHeaderText("Manage all your learning topics")
-    })
+    }, [setHeaderText])
+
     const filteredTopics = useAppSelector(selectFilteredTopics);
     const topics = useAppSelector((state)=> state.topic.data)
-    const dispatch = useAppDispatch();
-
-    useEffect(() => {
-        const storedTopics = localStorage.getItem("topic");
-        if (storedTopics) {
-            dispatch(hydrateTopics(JSON.parse(storedTopics)));
-        }
-    }, [dispatch]);
 
     return (
         <div className="px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 h-full dark:bg-sidebar flex flex-col gap-4 md:gap-6">
@@ -32,17 +24,17 @@ const TopicsPage = () => {
             <div className="w-full grid grid-cols-1 mt-4 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5">
                 {topics.length > 0 ? (
                     filteredTopics.map((topic: any, index: number) => (
-                            <TopicCard
-                                id={topic.id}
-                                key={index}
-                                title={topic.title}
-                                category={topic.category}
-                                level={topic.level}
-                                message={topic.message}
-                                status={topic.status}
-                                progress={topic.progress}
-                            />
-                        ))
+                        <TopicCard
+                            id={topic.id}
+                            key={index}
+                            title={topic.title}
+                            category={topic.category}
+                            level={topic.level}
+                            message={topic.message}
+                            status={topic.status}
+                            progress={topic.progress}
+                        />
+                    ))
                 ): (
                     <Card className="w-full p-8 text-center">
                         <p className="dark:text-sidebar-foreground">No stuck topics yet! 🎉</p>
