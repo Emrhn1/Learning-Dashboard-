@@ -5,7 +5,7 @@ import LightbulbOutlinedIcon from "@mui/icons-material/LightbulbOutlined";
 import ErrorRoundedIcon from "@mui/icons-material/ErrorRounded";
 import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
 import ClearIcon from '@mui/icons-material/Clear';
-import { clearCards } from "@/redux/features/reflection";
+import { removeCard } from "@/redux/features/reflection";
 const PrevReflections = () => {
   const cards = useAppSelector((state) => state.cards.cards);
   const dispatch = useAppDispatch();
@@ -49,7 +49,7 @@ const PrevReflections = () => {
                   {card.difficult}
                 </p>
               </div>
-             <ClearIcon color="error" className="cursor-pointer" onClick={()=> dispatch(clearCards())}/>
+             <ClearIcon color="error" className="cursor-pointer" onClick={()=> dispatch(removeCard(card.id))}/>
             </CardContent>
           </Card>
         );

@@ -37,7 +37,7 @@ const AddReflection = () => {
                        className="min-h-[120px] resize-none"
                    />
                </div>
-
+               
                <div className="space-y-3">
                    <CardTitle className="text-lg font-normal">What was difficult?</CardTitle>
                    <Textarea
