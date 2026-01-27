@@ -18,7 +18,7 @@ const TopicsPage = () => {
     const topics = useAppSelector((state)=> state.topic.data)
 
     return (
-        <div className="px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 h-full dark:bg-sidebar flex flex-col gap-4 md:gap-6">
+        <div className="px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 dark:bg-sidebar flex flex-col gap-4 md:gap-6">
             <Hero title={"Topics"} description={"Manage and track all your learning topics"}/>
             <TopicFilter/>
             <div className="w-full grid grid-cols-1 mt-4 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5">

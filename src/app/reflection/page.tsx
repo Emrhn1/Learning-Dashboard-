@@ -11,7 +11,7 @@ const ReflectionPage = () => {
         setHeaderText("Reflect on your learning journey")
     },[setHeaderText])
     return (
-        <div className="flex dark:bg-sidebar h-full flex-col gap-4 md:gap-6 lg:gap-8 px-4 sm:px-8 md:px-20 lg:px-40 xl:px-60 2xl:px-80 py-4 md:py-6 lg:py-8">
+        <div className="flex dark:bg-sidebar flex-col gap-4 md:gap-6 lg:gap-8 px-4 sm:px-8 md:px-20 lg:px-40 xl:px-60 2xl:px-80 py-4 md:py-6 lg:py-8">
         <div className="flex gap-2 items-center">
         <AutoAwesomeOutlinedIcon style={{color:"#9810FA"}}/>
         <Hero title={"Reflection"} description={"Take a moment to reflect on your learning journey"}/>
