@@ -14,7 +14,7 @@ const StuckNotes = () => {
        <div className="flex dark:bg-sidebar flex-col gap-4 md:gap-6 lg:gap-8 px-4 sm:px-8 md:px-20 lg:px-40 xl:px-60 2xl:px-80 py-4 md:py-6 lg:py-8">
             <div className="flex gap-2 md:gap-4 items-center">
                 <ErrorOutlineOutlinedIcon className="mb-14 md:mb-1" style={{color:"#f54900", borderRadius:"10px", width:"50px", height:"40px" ,padding:"8px" }} />
-                <Hero title={"Stuck Notes"} description={"Focus on your learning blockers and work through difficulties"}/>
+                <Hero title={"Stuck Notes"} description={"Focus on your learning blockers and work through difficulties"} showAddTopic={false}/>
             </div>
             <StuckHero/>
             <StuckNotesList/>

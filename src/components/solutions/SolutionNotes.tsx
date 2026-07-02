@@ -19,8 +19,8 @@ const SolutionNotes = () => {
     return (
          <div className="w-full flex flex-col mt-4 gap-6">
             {solutionsTopic.length > 0 ? (
-                solutionsTopic.map((topic, index) => (
-                    <Card key={index} className="w-full flex flex-col hover:shadow-md p-6">
+                solutionsTopic.map((topic) => (
+                    <Card key={topic.id} className="w-full flex flex-col hover:shadow-md p-6">
                         <div className="flex justify-between items-start">
                             <div className="flex flex-col gap-1">
                                 <CardTitle className="text-xl font-semibold">
@@ -43,7 +43,7 @@ const SolutionNotes = () => {
                         <Card className="w-full bg-[#FFF7ED] dark:bg-gray-800 border-none shadow-none">
                             <CardContent className="p-4">
                                 <div className="flex items-center gap-2 mb-2">
-                                    <span className="text-lg">📖</span>
+                                    <span className="text-lg">Note</span>
                                     <Label className="text-sm text-[#0D542B] dark:text-sidebar-foreground font-semibold">
                                         Where I was stuck:
                                     </Label>
@@ -56,7 +56,7 @@ const SolutionNotes = () => {
                         <Card className="w-full bg-[#edfcf4] dark:bg-gray-700 border-none shadow-none">
                             <CardContent className="p-4">
                                 <div className="flex items-center gap-2 mb-2">
-                                    <span className="text-lg">✅</span>
+                                    <span className="text-lg">Done</span>
                                     <Label className="text-sm text-[#0D542B] dark:text-sidebar-foreground font-semibold">
                                         How I solved it:
                                     </Label>
@@ -73,14 +73,14 @@ const SolutionNotes = () => {
                                 style={{ color: "#a1a1a1", fontSize: 16 }} 
                             />
                             <span className="text-sm text-[#a1a1a1] dark:text-sidebar-foreground">
-                                Resolved {formatDate(new Date())}
+                                Resolved {formatDate(topic.solvedAt ? new Date(topic.solvedAt) : new Date())}
                             </span>
                         </div>
                     </Card>
                 ))
             ) : (
                 <Card className="w-full p-8 mt-4 text-center">
-                    <p className="text-[#737373] dark:text-sidebar-foreground">No solutions yet. Keep working on those stuck topics! 💪</p>
+                    <p className="text-[#737373] dark:text-sidebar-foreground">No solutions yet. Keep working on those stuck topics.</p>
                 </Card>
             )}
         </div>

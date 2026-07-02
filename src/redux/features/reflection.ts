@@ -4,7 +4,7 @@ export type CardsState = {
     id:string;
   learned: string;
   difficult: string;
-  createdAt: string; // Tarih ekleyelim
+  createdAt: string;
 };
 
 const initialState: { cards: CardsState[] } = {

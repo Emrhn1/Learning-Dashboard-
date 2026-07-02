@@ -5,7 +5,7 @@ import {Textarea} from "@/components/ui/textarea"
 import {useState} from "react";
 import {useAppDispatch} from "@/app/hooks";
 import {addCard} from "@/redux/features/reflection";
-import {toast, Toaster} from "sonner";
+import {toast} from "sonner";
 
 const AddReflection = () => {
     const [learned, setLearned] = useState<string>("")
@@ -13,13 +13,13 @@ const AddReflection = () => {
     const dispatch = useAppDispatch();
     
     const handleText = () => {
-        if (!learned || !difficult){
+        if (!learned.trim() || !difficult.trim()){
             toast.error("Please fill in both fields before saving.")
             return;
         }
         dispatch(addCard({
-            learned,
-            difficult,
+            learned: learned.trim(),
+            difficult: difficult.trim(),
         }))
         setLearned("")
         setDifficult("")

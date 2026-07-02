@@ -38,8 +38,8 @@ const StuckNotesList = () => {
     return (
         <div className="w-full flex flex-col gap-6">
             {stuckTopics.length > 0 ? (
-                stuckTopics.map((topic, index) => (
-                    <Card key={index} className="w-full flex flex-col hover:shadow-md p-6">
+                stuckTopics.map((topic) => (
+                    <Card key={topic.id} className="w-full flex flex-col hover:shadow-md p-6">
                         <div className="flex justify-between items-start">
                             <div className="flex flex-col gap-1">
                                 <CardTitle className="text-xl font-semibold">
@@ -78,7 +78,7 @@ const StuckNotesList = () => {
                                     style={{ color: "#a1a1a1", fontSize: 16 }} 
                                 />
                                 <span className="text-sm text-[#a1a1a1]">
-                                    Added {formatDate(new Date())}
+                                    Added {formatDate(topic.createdAt ? new Date(topic.createdAt) : new Date())}
                                 </span>
                             </div>
                             <div className="flex gap-3">
@@ -95,7 +95,7 @@ const StuckNotesList = () => {
                 ))
             ) : (
                 <Card className="w-full p-8 text-center">
-                    <p className="dark:text-sidebar-foreground">No stuck topics yet! 🎉</p>
+                    <p className="dark:text-sidebar-foreground">No stuck topics yet.</p>
                 </Card>
             )}
         </div>

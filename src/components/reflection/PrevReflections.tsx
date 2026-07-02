@@ -19,13 +19,13 @@ const PrevReflections = () => {
 
   return (
     <div className="space-y-4">
-      {cards.map((card, index) => {
+      {cards.map((card) => {
         return (
-          <Card key={index} className="w-auto xs:w-[550px] hover:shadow-md p-6">
+          <Card key={card.id} className="w-auto xs:w-[550px] hover:shadow-md p-6">
             <CardContent className="space-y-4 p-0">
               <div className="flex items-center gap-2 text-muted-foreground text-sm">
                 <CalendarTodayOutlinedIcon style={{ fontSize: "16px" }} />
-                <span className="dark:text-sidebar-foreground">{formatDate(new Date())}</span>
+                <span className="dark:text-sidebar-foreground">{formatDate(new Date(card.createdAt))}</span>
               </div>
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
