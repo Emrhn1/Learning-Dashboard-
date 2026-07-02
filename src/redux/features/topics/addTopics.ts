@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "@/redux/store";
+import type { RootState } from "@/redux/store";
 import { LevelType, Status } from "@/types/topicCard";
 
-interface Topic {
+export interface Topic {
   id: string;
   title: string;
   category: string;
@@ -11,6 +11,8 @@ interface Topic {
   message: string;
   progress: number;
   solution?: string;
+  createdAt: string;
+  solvedAt?: string;
 }
 
 interface TopicState {
@@ -46,16 +48,27 @@ export const addTopics = createSlice({
     hydrateTopics(state, action: PayloadAction<Topic[]>) {
       state.data = action.payload;
     },
-      removeTopic: (state, action: PayloadAction<string>) => {
-       state.data = state.data.filter((item)=> item.id !== action.payload);
-      },
-      saveSolution: (state, action: PayloadAction<{ id: string; solution: string }>) => {
-  const topic = state.data.find((item) => item.id === action.payload.id);
-  if (topic) {
-    topic.solution = action.payload.solution;
-    topic.status = "Active"; 
-  }
-}
+    removeTopic: (state, action: PayloadAction<string>) => {
+      state.data = state.data.filter((item) => item.id !== action.payload);
+    },
+    updateTopicProgress: (
+      state,
+      action: PayloadAction<{ id: string; progress: number }>,
+    ) => {
+      const topic = state.data.find((item) => item.id === action.payload.id);
+      if (topic) {
+        topic.progress = action.payload.progress;
+        topic.status = action.payload.progress >= 100 ? "Completed" : topic.status === "Completed" ? "Active" : topic.status;
+      }
+    },
+    saveSolution: (state, action: PayloadAction<{ id: string; solution: string }>) => {
+      const topic = state.data.find((item) => item.id === action.payload.id);
+      if (topic) {
+        topic.solution = action.payload.solution;
+        topic.solvedAt = new Date().toISOString();
+        topic.status = "Active";
+      }
+    },
   },
 });
 
@@ -80,4 +93,11 @@ export const selectSolutionsCount = (state: RootState) => {
 }
 
 export default addTopics.reducer;
-export const { addTopic, updateFilterTopic, hydrateTopics, removeTopic,saveSolution } = addTopics.actions;
+export const {
+  addTopic,
+  updateFilterTopic,
+  hydrateTopics,
+  removeTopic,
+  updateTopicProgress,
+  saveSolution,
+} = addTopics.actions;

@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect, useRef } from "react";
 import { useUser } from "@clerk/nextjs";
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
@@ -10,51 +11,57 @@ const UserDataProvider = ({ children }: { children: React.ReactNode }) => {
   const dispatch = useAppDispatch();
   const topics = useAppSelector((state) => state.topic.data);
   const cards = useAppSelector((state) => state.cards.cards);
-  const hasHydrated = useRef(false);
+  const hydratedUserId = useRef<string | null>(null);
 
-  // Kullanıcı yüklendiğinde localStorage'dan verileri al
   useEffect(() => {
-    if (isLoaded && user?.id && !hasHydrated.current) {
-      // Topics'i yükle
-      const storedTopics = localStorage.getItem(`topic_${user.id}`);
-      if (storedTopics) {
-        dispatch(hydrateTopics(JSON.parse(storedTopics)));
-      } else {
-        dispatch(hydrateTopics([])); // Boş başla
-      }
-
-      // Cards/Reflections'ı yükle
-      const storedCards = localStorage.getItem(`cards_${user.id}`);
-      if (storedCards) {
-        dispatch(hydrateCards(JSON.parse(storedCards)));
-      } else {
-        dispatch(hydrateCards([])); // Boş başla
-      }
-
-      hasHydrated.current = true;
+    if (!isLoaded || !user?.id || hydratedUserId.current === user.id) {
+      return;
     }
+
+    try {
+      const storedTopics = localStorage.getItem(`topic_${user.id}`);
+      dispatch(hydrateTopics(storedTopics ? JSON.parse(storedTopics) : []));
+    } catch {
+      dispatch(hydrateTopics([]));
+    }
+
+    try {
+      const storedCards = localStorage.getItem(`cards_${user.id}`);
+      dispatch(hydrateCards(storedCards ? JSON.parse(storedCards) : []));
+    } catch {
+      dispatch(hydrateCards([]));
+    }
+
+    hydratedUserId.current = user.id;
   }, [isLoaded, user?.id, dispatch]);
 
-  // Topics değiştiğinde localStorage'a kaydet
   useEffect(() => {
-    if (user?.id && hasHydrated.current) {
-      localStorage.setItem(`topic_${user.id}`, JSON.stringify(topics));
+    if (user?.id && hydratedUserId.current === user.id) {
+      try {
+        localStorage.setItem(`topic_${user.id}`, JSON.stringify(topics));
+      } catch {
+        console.error("Unable to save topics to localStorage.");
+      }
     }
   }, [topics, user?.id]);
 
-  // Cards değiştiğinde localStorage'a kaydet
   useEffect(() => {
-    if (user?.id && hasHydrated.current) {
-      localStorage.setItem(`cards_${user.id}`, JSON.stringify(cards));
+    if (user?.id && hydratedUserId.current === user.id) {
+      try {
+        localStorage.setItem(`cards_${user.id}`, JSON.stringify(cards));
+      } catch {
+        console.error("Unable to save reflections to localStorage.");
+      }
     }
   }, [cards, user?.id]);
 
-  // Kullanıcı değiştiğinde (logout/login) hydration'ı resetle
   useEffect(() => {
     if (!user) {
-      hasHydrated.current = false;
+      hydratedUserId.current = null;
+      dispatch(hydrateTopics([]));
+      dispatch(hydrateCards([]));
     }
-  }, [user]);
+  }, [user, dispatch]);
 
   return <>{children}</>;
 };

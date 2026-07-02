@@ -6,6 +6,9 @@ import { updateFilterTopic } from "@/redux/features/topics/addTopics";
 
 const TopicFilter = () => {
   const dispatch = useAppDispatch();
+  const currentLevel = useAppSelector((state) => state.topic.currentLevel);
+  const currentStatus = useAppSelector((state) => state.topic.currentStatus);
+
   return (
     <Card className="w-full hover:shadow-md pt-[25px] pr-[25px] pb-[25px] pl-[25px]">
       <CardContent className="p-0">
@@ -20,12 +23,15 @@ const TopicFilter = () => {
             <h2 className="text-[#525252] dark:text-sidebar-foreground text-sm font-medium">
               Difficulty Level
             </h2>
-            <ToggleGroup type={"single"} className="flex flex-wrap gap-2 justify-start">
+            <ToggleGroup
+              type="single"
+              value={currentLevel}
+              onValueChange={(level) => {
+                if (level) dispatch(updateFilterTopic({ level }));
+              }}
+              className="flex flex-wrap gap-2 justify-start"
+            >
               <ToggleGroupItem
-                defaultValue={"All Levels"}
-                onClick={() =>
-                  dispatch(updateFilterTopic({ level: "All Levels" }))
-                }
                 className="border border-border bg-background text-foreground !rounded-lg 
            data-[state=on]:bg-primary data-[state=on]:text-primary-foreground
            dark:data-[state=on]:bg-blue-600 dark:data-[state=on]:text-white
@@ -35,9 +41,6 @@ const TopicFilter = () => {
                 All Levels
               </ToggleGroupItem>
               <ToggleGroupItem
-                onClick={() =>
-                  dispatch(updateFilterTopic({ level: "Beginner" }))
-                }
                 className="border border-border bg-background text-foreground !rounded-lg 
            data-[state=on]:bg-primary data-[state=on]:text-primary-foreground
            dark:data-[state=on]:bg-blue-600 dark:data-[state=on]:text-white
@@ -47,9 +50,6 @@ const TopicFilter = () => {
                 Beginner
               </ToggleGroupItem>
               <ToggleGroupItem
-                onClick={() =>
-                  dispatch(updateFilterTopic({ level: "Intermediate" }))
-                }
                 className="border border-border bg-background text-foreground !rounded-lg 
            data-[state=on]:bg-primary data-[state=on]:text-primary-foreground
            dark:data-[state=on]:bg-blue-600 dark:data-[state=on]:text-white
@@ -59,9 +59,6 @@ const TopicFilter = () => {
                 Intermediate
               </ToggleGroupItem>
               <ToggleGroupItem
-                onClick={() =>
-                  dispatch(updateFilterTopic({ level: "Advanced" }))
-                }
                 className="border border-border bg-background text-foreground !rounded-lg 
            data-[state=on]:bg-primary data-[state=on]:text-primary-foreground
            dark:data-[state=on]:bg-blue-600 dark:data-[state=on]:text-white
@@ -76,13 +73,16 @@ const TopicFilter = () => {
             <h2 className="text-[#525252] dark:text-sidebar-foreground text-sm font-medium">
               Status
             </h2>
-            <ToggleGroup type={"single"} className="flex flex-wrap gap-2 justify-start">
+            <ToggleGroup
+              type="single"
+              value={currentStatus}
+              onValueChange={(status) => {
+                if (status) dispatch(updateFilterTopic({ status }));
+              }}
+              className="flex flex-wrap gap-2 justify-start"
+            >
               <ToggleGroupItem
-                defaultValue={"All Status"}
                 value={"All Status"}
-                onClick={() =>
-                  dispatch(updateFilterTopic({ status: "All Status" }))
-                }
                 className="border border-border bg-background text-foreground !rounded-lg 
            data-[state=on]:bg-primary data-[state=on]:text-primary-foreground
            dark:data-[state=on]:bg-blue-600 dark:data-[state=on]:text-white
@@ -96,9 +96,6 @@ const TopicFilter = () => {
            dark:data-[state=on]:bg-blue-600 dark:data-[state=on]:text-white
            hover:bg-accent transition-colors text-xs sm:text-sm px-3 py-1.5"
                 value={"Active"}
-                onClick={() =>
-                  dispatch(updateFilterTopic({ status: "Active" }))
-                }
               >
                 Active
               </ToggleGroupItem>
@@ -107,7 +104,6 @@ const TopicFilter = () => {
            data-[state=on]:bg-primary data-[state=on]:text-primary-foreground
            dark:data-[state=on]:bg-blue-600 dark:data-[state=on]:text-white
            hover:bg-accent transition-colors text-xs sm:text-sm px-3 py-1.5"
-                onClick={() => dispatch(updateFilterTopic({ status: "Stuck" }))}
                 value={"Stuck"}
               >
                 Stuck
@@ -117,9 +113,6 @@ const TopicFilter = () => {
            data-[state=on]:bg-primary data-[state=on]:text-primary-foreground
            dark:data-[state=on]:bg-blue-600 dark:data-[state=on]:text-white
            hover:bg-accent transition-colors text-xs sm:text-sm px-3 py-1.5"
-                onClick={() =>
-                  dispatch(updateFilterTopic({ status: "Completed" }))
-                }
                 value={"Completed"}
               >
                 Completed

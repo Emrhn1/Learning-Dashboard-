@@ -5,6 +5,7 @@ import TopicCard from "@/components/dashboard/TopicCard";
 import { useHeader } from "@/app/providers";
 import { useEffect } from "react";
 import { useAppSelector } from "@/app/hooks";
+import type { Topic } from "@/redux/features/topics/addTopics";
 
 export default function Home() {
   const { setHeaderText } = useHeader();
@@ -19,16 +20,17 @@ export default function Home() {
       <Hero title={"Your Learning Topics"} description={"Continue your learning journey"} />
       <div className="w-full grid grid-cols-1 mt-4 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5">
         {topics.length > 0 ? (
-          topics.map((topic: any, index: number) => (
+          topics.map((topic: Topic) => (
             <TopicCard
               id={topic.id}
-              key={index}
+              key={topic.id}
               title={topic.title}
               category={topic.category}
               level={topic.level}
               message={topic.message}
               status={topic.status}
               progress={topic.progress}
+              createdAt={topic.createdAt}
             />
           ))
         ) : (

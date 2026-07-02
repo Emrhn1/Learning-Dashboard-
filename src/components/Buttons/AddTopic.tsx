@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { toast } from "sonner";
@@ -32,28 +32,35 @@ const AddTopic = () => {
   const dispatch = useAppDispatch();
 
   const handleSubmit = () => {
-    if (!title || !category || !level || !status) {
+    if (!title.trim() || !category.trim() || !level || !status) {
       toast.error("Please fill all fields");
       return;
-    } else {
-      dispatch(
-        addTopic({
-          id: Date.now().toString(),
-          title: title,
-          category: category,
-          level: level,
-          status: status,
-          message: message,
-          progress: progress[0],
-        }),
-      );
-      toast.success("Topic added successfully!");
     }
+    if (status === "Stuck" && !message.trim()) {
+      toast.error("Please describe where you are stuck");
+      return;
+    }
+
+    dispatch(
+      addTopic({
+        id: crypto.randomUUID(),
+        title: title.trim(),
+        category: category.trim(),
+        level,
+        status: progress[0] >= 100 ? "Completed" : status,
+        message: message.trim(),
+        progress: progress[0],
+        createdAt: new Date().toISOString(),
+      }),
+    );
+    toast.success("Topic added successfully!");
+
     setTitle("");
     setCategory("");
     setLevel("");
     setStatus("");
     setMessage("");
+    setProgress([0]);
     setOpen(false);
   };
 
@@ -197,7 +204,7 @@ const AddTopic = () => {
               <Label className="text-sm text-[#404040] dark:text-sidebar-foreground sm:text-base">
                 Starting Progress
               </Label>
-              <Label className="text-[#525252] dark:text-sidebar-foreground">{`%${progress}`}</Label>
+              <Label className="text-[#525252] dark:text-sidebar-foreground">{`${progress[0]}%`}</Label>
             </div>
 
             <ProgressBar
@@ -213,12 +220,9 @@ const AddTopic = () => {
           {/* Optional Notes */}
           <div className="flex flex-col -mt-2 gap-2 sm:gap-3">
             <Label className="text-sm text-[#404040] dark:text-sidebar-foreground sm:text-base">
-              {status === "Active" && null
-                ? "Optional Notes"
-                : "Where are you stuck?"}
+              {status === "Stuck" ? "Where are you stuck?" : "Optional Notes"}
             </Label>
             <Textarea
-              disabled={status === "Active"}
               required={status === "Stuck"}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
