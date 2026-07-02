@@ -22,7 +22,7 @@ const StatCard = () => {
                                     <Label className="text-[#171717] dark:text-sidebar-foreground text-2xl sm:text-3xl">{activeCount}</Label>
                                     <Label className="text-[#a1a1a1] dark:text-sidebar-foreground text-xs mt-8">+2 this week</Label>
                                 </div>
-                                <Icon className="text-[#737373] dark:text-sidebar-foreground w-5 h-5 sm:w-6 sm:h-6">{prop.icon}</Icon>
+                                <Icon className="text-[#737373] dark:text-sidebar-foreground w-5 h-5 sm:w-6 sm:h-6" />
                             </div>
                         </CardContent>
                     </Card>
@@ -39,7 +39,7 @@ const StatCard = () => {
                                     <Label className="text-[#171717] dark:text-sidebar-foreground text-2xl sm:text-3xl">{stuckCount}</Label>
                                     <Label className="text-[#a1a1a1] dark:text-sidebar-foreground text-xs mt-8">+2 this week</Label>
                                 </div>
-                                <Icon className="text-[#737373] dark:text-sidebar-foreground w-5 h-5 sm:w-6 sm:h-6">{prop.icon}</Icon>
+                                <Icon className="text-[#737373] dark:text-sidebar-foreground w-5 h-5 sm:w-6 sm:h-6" />
                             </div>
                         </CardContent>
                     </Card>
@@ -56,7 +56,7 @@ const StatCard = () => {
                                     <Label className="text-[#171717] dark:text-sidebar-foreground text-2xl sm:text-3xl">12 Hours</Label>
                                     <Label className="text-[#a1a1a1] dark:text-sidebar-foreground text-xs mt-8">+2 this week</Label>
                                 </div>
-                                <Icon className="text-[#737373] dark:text-sidebar-foreground w-5 h-5 sm:w-6 sm:h-6">{prop.icon}</Icon>
+                                <Icon className="text-[#737373] dark:text-sidebar-foreground w-5 h-5 sm:w-6 sm:h-6" />
                             </div>
                         </CardContent>
                     </Card>
@@ -73,7 +73,7 @@ const StatCard = () => {
                                     <Label className="text-[#171717] dark:text-sidebar-foreground text-2xl sm:text-3xl">3</Label>
                                     <Label className="text-[#a1a1a1] dark:text-sidebar-foreground text-xs mt-8">+2 this week</Label>
                                 </div>
-                                <Icon className="text-[#737373] dark:text-sidebar-foreground w-5 h-5 sm:w-6 sm:h-6">{prop.icon}</Icon>
+                                <Icon className="text-[#737373] dark:text-sidebar-foreground w-5 h-5 sm:w-6 sm:h-6" />
                             </div>
                         </CardContent>
                     </Card>

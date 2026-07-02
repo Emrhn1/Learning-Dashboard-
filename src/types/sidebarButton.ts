@@ -3,8 +3,10 @@ import TopicIcon from '@mui/icons-material/Topic';
 import FmdBadIcon from '@mui/icons-material/FmdBad';
 import EmojiObjectsIcon from '@mui/icons-material/EmojiObjects';
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
+import type { SvgIconComponent } from '@mui/icons-material';
+
 export type SidebarButton = {
-    icon: any;
+    icon: SvgIconComponent;
     text: string;
     url: string;
 }

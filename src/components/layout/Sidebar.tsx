@@ -22,7 +22,7 @@ const Sidebar = () => {
 
             {/* Sidebar */}
             <aside className={`
-                fixed inset-y-0 left-0 z-50 w-64 bg-sidebar dark: bg-sidebar dark:text-sidebar-foreground
+                fixed inset-y-0 left-0 z-50 w-64 bg-sidebar dark:bg-sidebar dark:text-sidebar-foreground
                 transform transition-transform duration-300 ease-in-out
                 ${isOpen ? 'translate-x-0' : '-translate-x-full'}
                 lg:relative lg:translate-x-0 lg:flex lg:flex-col lg:h-screen
@@ -42,17 +42,17 @@ const Sidebar = () => {
                     </Button>
                 </div>
                 <nav className="flex flex-col gap-1 px-3">
-                    {buttons.map((button, index) => {
+                    {buttons.map((button) => {
                         const Icon = button.icon
                         const isActive = pathname === button.url
                         return (
-                            <Link href={button.url} key={index} onClick={() => setIsOpen(false)}>
+                            <Link href={button.url} key={button.url} onClick={() => setIsOpen(false)}>
                                 <Button
                                     variant={isActive ? "secondary" : "ghost"}
                                     className="w-full cursor-pointer flex items-center gap-3 justify-start py-2 text-[#525252]"
                                 >
-                                    <Icon className={isActive ? "text-white w-4 h-4" : "text-[#525252] dark: text-sidebar-foreground w-4 h-4 "} />
-                                    <span className={isActive ? "text-white" : "text-[#525252] dark: text-sidebar-foreground"}>{button.text}</span>
+                                    <Icon className={isActive ? "text-white w-4 h-4" : "text-[#525252] dark:text-sidebar-foreground w-4 h-4 "} />
+                                    <span className={isActive ? "text-white" : "text-[#525252] dark:text-sidebar-foreground"}>{button.text}</span>
                                 </Button>
                             </Link>
                         )

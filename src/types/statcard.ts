@@ -2,10 +2,11 @@ import TopicRoundedIcon from '@mui/icons-material/TopicRounded';
 import PriorityHighRoundedIcon from '@mui/icons-material/PriorityHighRounded';
 import TrendingUpRoundedIcon from '@mui/icons-material/TrendingUpRounded';
 import BlurCircularRoundedIcon from '@mui/icons-material/BlurCircularRounded';
+import type { SvgIconComponent } from '@mui/icons-material';
 
 export type StatCard = {
     title: string,
-    icon: any,
+    icon: SvgIconComponent,
 }
 
 export const activeTopics: StatCard[] = [
@@ -32,4 +33,3 @@ export const todayFocus: StatCard[] = [
         icon: BlurCircularRoundedIcon
     }
 ]
-
